@@ -1,0 +1,136 @@
+:root {
+    --globalPadding: 10px;
+    --backgroundOne: #2185d5;
+    --backgroundTwo: #202020;
+    --backgroundThree: #505050;
+
+    --borderColor: orange;
+
+    --lightColor: #f3f3f3;
+    --darkColor: #222;
+
+    --roundBorder: 10px;
+    --circleBorder: 50%;
+}
+html, body, .container {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+    grid-template-columns: repeat(9, 1fr);
+    gap: var(--globalPadding);
+}
+
+.container > #header {
+    grid-area: 1/1/2/10;
+    background-color: var(--backgroundOne);
+    padding: var(--globalPadding);
+    color: var(--lightColor);
+    border-bottom: 10px solid var(--borderColor);
+}
+
+#bookList {
+    grid-area: 2/3/8/8;
+    background-color: var(--backgroundThree);
+    color: var(--lightColor);
+}
+
+#addBookDiv, #bookList {
+    grid-area: 2/3/3/8;
+    padding: var(--globalPadding);
+    height: auto;
+    border-radius: var(--roundBorder);
+}
+
+#bookList > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.book {
+    background-color: var(--backgroundTwo);
+    padding: var(--globalPadding);
+}
+
+.book > h4 {
+    margin: 0px;
+}
+
+#addBookDiv {
+    visibility: hidden;
+    background-color: var(--backgroundTwo);
+}
+
+
+
+
+#addBookDiv > form {
+    align-content: center;
+}
+#addBookDiv > form > div > div{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    gap: var(--globalPadding);
+    grid-auto-flow: row;
+}
+
+#addBookDiv > form > div > div > a {
+    justify-self: end;
+    color: var(--lightColor);
+}
+
+#addBookDiv > form > div > div > input {
+    justify-self: start;
+    width: clamp(10%, 500px, 100%);
+    grid-column: 2/4;
+}
+
+#addBookDiv > form > div > * {
+    padding: var(--globalPadding);
+    background-color: var(--backgroundTwo);
+    color: var(--lightColor);
+}
+
+#addBookDiv > form > div > div:last-child > div {
+    display: flex;
+    gap: var(--globalPadding);
+}
+#addBookDiv > form > button {
+    align-self: center;
+    background-color: green;
+    margin-top: var(--globalPadding);
+}
+
+.container > #addBookBtn {
+    grid-area: 8/8/9/9;
+    height: 75px;
+    width: 75px;
+    font-size: 32.5px;
+    background-color: var(--backgroundOne);
+    color: var(--lightColor);
+    border-radius: var(--circleBorder);
+    border-color: transparent;
+}
+
+.container > #addBookBtn:hover {
+    background-color: var(--backgroundTwo);
+    font-size: 60px;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin { 
+    100% { 
+        
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    } 
+}
+
+
+

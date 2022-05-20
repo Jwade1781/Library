@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="main.js"></script>
+    <title>Library</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="header">
+            <h1>Virtual Library</h1>
+        </div>
+        <div id="bookList">
+            <h3>Book List</h3>
+            <div>
+                <div class="book">
+                    <h4 class="bookTitle">Title: The Hobbit</h4>
+                    <h4 class="bookAuthor">Author: J.R.R Tolkien</h4>
+                    <h4 class="bookPages">Pages: 295</h4>
+                    <h4 class="bookRead">Haven't Read</h4>
+                </div>
+
+                <div class="book">
+                    <h4 class="bookTitle">Title: The Hobbit</h4>
+                    <h4 class="bookAuthor">Author: J.R.R Tolkien</h4>
+                    <h4 class="bookPages">Pages: 295</h4>
+                    <h4 class="bookRead">Haven't Read</h4>
+                </div>
+
+                <div class="book">
+                    <h4 class="bookTitle">Title: The Hobbit</h4>
+                    <h4 class="bookAuthor">Author: J.R.R Tolkien</h4>
+                    <h4 class="bookPages">Pages: 295</h4>
+                    <h4 class="bookRead">Haven't Read</h4>
+                </div>
+
+                <div class="book">
+                    <h4 class="bookTitle">Title: The Hobbit</h4>
+                    <h4 class="bookAuthor">Author: J.R.R Tolkien</h4>
+                    <h4 class="bookPages">Pages: 295</h4>
+                    <h4 class="bookRead">Haven't Read</h4>
+                </div>
+
+                <div class="book">
+                    <h4 class="bookTitle">Title: The Hobbit</h4>
+                    <h4 class="bookAuthor">Author: J.R.R Tolkien</h4>
+                    <h4 class="bookPages">Pages: 295</h4>
+                    <h4 class="bookRead">Haven't Read</h4>
+                </div>
+            </div>
+        </div>
+        <div id="addBookDiv">
+            <form>
+                <div>
+                    <div>
+                        <a>Book Title</a>
+                        <input type="text" placeholder="Book Title">
+                    </div>
+
+                    <div>
+                        <a>Author Name</a>
+                        <input type="text" placeholder="Author Name">
+                    </div>
+
+                    <div>
+                        <a> Total Pages</a>
+                        <input type="text" placeholder="Total Pages">
+                    </div>
+
+                    <div>
+                        <a>Read</a>
+                        <div>
+                            <label for="yesRead">Yes</label>
+                            <input type="radio" id="yesRead" value="true" name="read">
+
+
+                            <label for="noRead">No</label>
+                            <input type="radio" id="noRead" vale="false" name="read">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <button id="addBookBtn" onclick="addNewBook()">+</button>
+    </div>
+</body>
+
+</html>
