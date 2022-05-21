@@ -1,13 +1,16 @@
 :root {
     --globalPadding: 10px;
-    --backgroundOne: #2185d5;
-    --backgroundTwo: #202020;
-    --backgroundThree: #505050;
+    --bgColorOne: #2185d5;
+    --bgColorTwo: #202020;
+    --bgColorThree: #505050;
+    --bgColorInvalid: red;
+    --bgColorValid: #4c8b55;
 
-    --borderColor: orange;
+    --accentColorOne: orange;
 
     --lightColor: #f3f3f3;
     --darkColor: #222;
+
 
     --roundBorder: 10px;
     --circleBorder: 50%;
@@ -28,15 +31,15 @@ html, body, .container {
 
 .container > #header {
     grid-area: 1/1/2/10;
-    background-color: var(--backgroundOne);
+    background-color: var(--bgColorOne);
     padding: var(--globalPadding);
     color: var(--lightColor);
-    border-bottom: 10px solid var(--borderColor);
+    border-bottom: var(--globalPadding) solid var(--accentColorOne);
 }
 
 #bookList {
     grid-area: 2/3/8/8;
-    background-color: var(--backgroundThree);
+    background-color: var(--bgColorThree);
     color: var(--lightColor);
 }
 
@@ -47,15 +50,30 @@ html, body, .container {
     border-radius: var(--roundBorder);
 }
 
+#bookList > h3 {
+    text-align: center;
+}
+
 #bookList > div {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--globalPadding);
 }
 .book {
-    background-color: var(--backgroundTwo);
+    background-color: var(--bgColorTwo);
     padding: var(--globalPadding);
+    border-radius: var(--roundBorder);
 }
+
+#bookList > div > .notRead {
+    background-color: var(--bgColorInvalid);
+
+}
+
+#bookList > div > .read {
+    background-color: var(--bgColorValid);
+}
+
 
 .book > h4 {
     margin: 0px;
@@ -63,9 +81,8 @@ html, body, .container {
 
 #addBookDiv {
     visibility: hidden;
-    background-color: var(--backgroundTwo);
+    background-color: var(--bgColorTwo);
 }
-
 
 
 
@@ -93,7 +110,7 @@ html, body, .container {
 
 #addBookDiv > form > div > * {
     padding: var(--globalPadding);
-    background-color: var(--backgroundTwo);
+    background-color: var(--bgColorTwo);
     color: var(--lightColor);
 }
 
@@ -108,25 +125,25 @@ html, body, .container {
 }
 
 .container > #addBookBtn {
-    grid-area: 8/8/9/9;
+    position: fixed;
+    bottom: 100px;
+    right: 100px;
     height: 75px;
     width: 75px;
     font-size: 32.5px;
-    background-color: var(--backgroundOne);
+    background-color: var(--bgColorOne);
     color: var(--lightColor);
     border-radius: var(--circleBorder);
     border-color: transparent;
 }
 
 .container > #addBookBtn:hover {
-    background-color: var(--backgroundTwo);
-    font-size: 60px;
+    background-color: var(--bgColorTwo);
     animation:spin 1s linear infinite;
 }
 
 @keyframes spin { 
     100% { 
-        
         -webkit-transform: rotate(360deg); 
         transform:rotate(360deg); 
     } 

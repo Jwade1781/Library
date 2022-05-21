@@ -1,13 +1,13 @@
 let myLibrary = [];
 
-function Book(tite, author, pages, read){
+function Book(title, author, pages, read){
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
 
     this.info = function(){
-        var returnString = ` ${this.title} by ${this.author}, ${this.pages} pages `
+        var returnString = ` ${this.title} by ${this.author}, ${this.pages} pages`
         this.read ? returnString += " has been read" : returnString += " not read yet"
         return returnString;
     }
