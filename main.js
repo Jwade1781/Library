@@ -4,17 +4,17 @@ const debugAddBook = false;
 let totalRead = 0;
 let totalNotRead = 0;
 
-window.addEventListener("load", () =>{
+window.addEventListener("load", () => {
     if (debugAddBook) toggleAddBookVisibility();
 });
 
-function addNewBook(){
+function addNewBook() {
     const appendBookToDom = (book) => {
         let parent = document.querySelector("#books");
         let newNode = document.createElement("div");
         newNode.classList.add("book");
         newNode.classList.add("indentedHoverDark");
-        
+
         book.getRead() ? newNode.classList.add("read") : newNode.classList.add("notRead");
 
         const createHeader = (newNode, classes, text) => {
@@ -32,20 +32,37 @@ function addNewBook(){
                 let button = document.createElement("img");
                 button.classList.add(className);
                 button.src = imgSrc;
-            
+
                 button.addEventListener("click", () => {
-                    switch (className){
+                    switch (className) {
                         case 'trashButton':
                             console.log("Trash Pressed");
                             parent.removeChild(newNode);
-                            for(let i = 0; i < myLibrary.length; i++){
+                            newNode.classList.contains("read") ? document.querySelector("#totalRead").textContent = "Total Books Read: " + --totalRead : document.querySelector("#totalNotRead").textContent = "Total Books Not Read: " + --totalNotRead;
+                            for (let i = 0; i < myLibrary.length; i++) {
                                 if (myLibrary[i][0] == newNode)
                                     myLibrary.splice(i, 1);
                             }
                             break;
 
                         case 'readButton':
-                            console.log("Read Pressed");
+                            let toggleRead = (currentClass, newClass) => {
+                                newNode.classList.add(newClass);
+                                newNode.classList.remove(currentClass);
+                            }
+
+                            if (newNode.classList.contains("read")) {
+                                toggleRead("read", "notRead");
+                                document.querySelector("#totalRead").textContent = "Total Books Read: " + --totalRead;
+                                document.querySelector("#totalNotRead").textContent = "Total Books Not Read: " + ++totalNotRead;
+                                console.log("updated");
+                            }
+                            else {
+                                toggleRead("notRead", "read");
+                                document.querySelector("#totalRead").textContent = "Total Books Read: " + ++totalRead;
+                                document.querySelector("#totalNotRead").textContent = "Total Books Not Read: " + --totalNotRead;
+                                console.log("updated");
+                            }
                             break;
                     }
                 });
@@ -59,7 +76,7 @@ function addNewBook(){
 
         let readText;
 
-        if (book.getRead()){
+        if (book.getRead()) {
             readText = "Read";
             document.querySelector("#totalRead").textContent = "Total Books Read: " + ++totalRead;
         }
@@ -81,13 +98,13 @@ function addNewBook(){
     }
 
     let bookQueryDic = {
-        title : document.querySelector("#bookTitle").value,
-        author : document.querySelector("#bookAuthor").value,
-        pages : document.querySelector("#bookPages").value,
-        read : document.querySelector('input[name="bookRead"]:checked').value
+        title: document.querySelector("#bookTitle").value,
+        author: document.querySelector("#bookAuthor").value,
+        pages: document.querySelector("#bookPages").value,
+        read: document.querySelector('input[name="bookRead"]:checked').value
     }
 
-    let newBook = new Book (bookQueryDic["title"], bookQueryDic["author"], bookQueryDic["pages"],(bookQueryDic["read"] === 'true'));
+    let newBook = new Book(bookQueryDic["title"], bookQueryDic["author"], bookQueryDic["pages"], (bookQueryDic["read"] === 'true'));
     let newNode = appendBookToDom(newBook);
     myLibrary.push([newNode, newBook]);
     console.log(myLibrary);
@@ -95,7 +112,7 @@ function addNewBook(){
 }
 
 const toggleAddBookVisibility = () => {
-    if (bookListVis){
+    if (bookListVis) {
         document.querySelector("#addBookDiv").style.visibility = "visible";
         document.querySelector("#bookList").style.visibility = "hidden";
         bookListVis = false;
@@ -109,25 +126,26 @@ const toggleAddBookVisibility = () => {
 }
 
 class Book {
-    constructor(title, author, pages, read){
+    constructor(title, author, pages, read) {
         this.title = title;
         this.author = author;
         this.pages = pages;
         this.read = read;
     }
 
-    getTitle(){return this.title;}
-    getAuthor(){return this.author;}
-    getPages(){return this.pages;}
-    getRead(){return this.read;}
+    getTitle() { return this.title; }
+    getAuthor() { return this.author; }
+    getPages() { return this.pages; }
+    getRead() { return this.read; }
+    setRead(read) { this.read = read; }
 
-    printInfo(){
+    printInfo() {
         var returnString = `${this.title} by ${this.author}, ${this.pages} pages`
         this.read ? returnString += " has been read" : returnString += " not been read yet"
         return returnString;
     }
 
-    toggleRead(){
+    toggleRead() {
         this.read ? this.read = false : this.read = true;
     }
 }
