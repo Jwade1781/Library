@@ -100,8 +100,13 @@ html, body, .container {
     margin: var(--globalPadding);
 }
 
-#bookList > div > div:nth-child(2) > * > h2 {
+#bookList > div > div:nth-child(2) > * > h2{
     position: fixed;
+}
+
+#bookList > div > div:nth-child(2) > * > h1 {
+    text-align: center;
+    margin-bottom: var(--globalPadding);
 }
 
 .book > h4 {

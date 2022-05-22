@@ -1,6 +1,8 @@
 let myLibrary = [];
 let bookListVis = true;
-const debugAddBook = true;
+const debugAddBook = false;
+let totalRead = 0;
+let totalNotRead = 0;
 
 window.addEventListener("load", () =>{
     if (debugAddBook) toggleAddBookVisibility();
@@ -9,15 +11,13 @@ window.addEventListener("load", () =>{
 function addNewBook(){
     const appendBookToDom = (book) => {
         let parent = document.querySelector("#books");
-        console.log(typeof(parent) + "\n" + parent)
         let newNode = document.createElement("div");
-        console.log(typeof(newNode) + "\n" + newNode)
         newNode.classList.add("book");
         newNode.classList.add("indentedHoverDark");
         
-        book.getRead ? newNode.classList.add("read") : newNode.classList.add("notRead");
+        book.getRead() ? newNode.classList.add("read") : newNode.classList.add("notRead");
 
-        const createHeader = (book, newNode, classes, text) => {
+        const createHeader = (newNode, classes, text) => {
             let header = document.createElement("h4");
             header.classList.add(classes);
             header.textContent = text;
@@ -32,8 +32,24 @@ function addNewBook(){
                 let button = document.createElement("img");
                 button.classList.add(className);
                 button.src = imgSrc;
+            
+                button.addEventListener("click", () => {
+                    switch (className){
+                        case 'trashButton':
+                            console.log("Trash Pressed");
+                            parent.removeChild(newNode);
+                            for(let i = 0; i < myLibrary.length; i++){
+                                if (myLibrary[i][0] == newNode)
+                                    myLibrary.splice(i, 1);
+                            }
+                            break;
+
+                        case 'readButton':
+                            console.log("Read Pressed");
+                            break;
+                    }
+                });
                 parentDiv.appendChild(button);
-                console.log("Appended");
             }
 
             createButton(bookButtons, "readButton", "data/images/book.svg");
@@ -41,24 +57,40 @@ function addNewBook(){
             newNode.appendChild(bookButtons);
         }
 
+        let readText;
 
-        createHeader(book, newNode, "bookTitle", book.getTitle());
-        createHeader(book, newNode, "bookAuthor", book.getAuthor());
-        createHeader(book, newNode, "bookPages", book.getPages());
-        createHeader(book, newNode, "bookRead", book.getRead());
+        if (book.getRead()){
+            readText = "Read";
+            document.querySelector("#totalRead").textContent = "Total Books Read: " + ++totalRead;
+        }
+
+        else {
+            readText = "Haven't Read";
+            document.querySelector("#totalNotRead").textContent = "Total Books Not Read: " + ++totalNotRead;
+        }
+
+        createHeader(newNode, "bookTitle", "Title: " + book.getTitle());
+        createHeader(newNode, "bookAuthor", "Author: " + book.getAuthor());
+        createHeader(newNode, "bookPages", "Pages: " + book.getPages());
+        createHeader(newNode, "bookRead", readText);
         createBookButtons(newNode);
         parent.appendChild(newNode);
+
+        if (document.querySelector("#startingBook")) parent.removeChild(document.querySelector("#startingBook"))
+        return newNode;
     }
 
-    let values = {
+    let bookQueryDic = {
         title : document.querySelector("#bookTitle").value,
         author : document.querySelector("#bookAuthor").value,
-        pages : document.querySelector("#bookPages").value
+        pages : document.querySelector("#bookPages").value,
+        read : document.querySelector('input[name="bookRead"]:checked').value
     }
 
-    //let newBook = new Book (values[title], values[author], values[pages], true);
-    let newBook = new Book ("testTitle", "testAuthor", 32, true);
-    appendBookToDom(newBook);
+    let newBook = new Book (bookQueryDic["title"], bookQueryDic["author"], bookQueryDic["pages"],(bookQueryDic["read"] === 'true'));
+    let newNode = appendBookToDom(newBook);
+    myLibrary.push([newNode, newBook]);
+    console.log(myLibrary);
     toggleAddBookVisibility();
 }
 
@@ -99,9 +131,3 @@ class Book {
         this.read ? this.read = false : this.read = true;
     }
 }
-
-let theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
-myLibrary.push(theHobbit);
-
-console.log(theHobbit.printInfo() + new Date().getMilliseconds() + myLibrary);
-delete theHobbit;

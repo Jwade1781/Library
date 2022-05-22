@@ -19,26 +19,23 @@
             <h3>Book List</h3>
             <div>
                 <div id="books">
-                    <div class="book notRead indentedHoverDark">
-                        <h4 class="bookTitle">Title: The Hobbit</h4>
-                        <h4 class="bookAuthor">Author: J.R.R Tolkien</h4>
-                        <h4 class="bookPages">Pages: 295</h4>
-                        <h4 class="bookRead">Haven't Read</h4>
+                    <div id="startingBook" class="book notRead indentedHoverDark">
+                        <h4 class="bookTitle">Title: None yet!</h4>
+                        <h4 class="bookAuthor">Author: --</h4>
+                        <h4 class="bookPages">Pages: --</h4>
                         <div class="bookButtons">
                             <img class="readButton" src="data/images/book.svg">
                             <img class="trashButton" src="data/images/trash.svg">
                         </div>
                     </div>
                 </div>
-
-
-
+                
                 <div>
                     <div>
-                        <h2 id="totalRead">Total Books Read: 1</h2>
+                        <h2 id="totalRead">Total Books Read: None</h2>
                     </div>
                     <div>
-                        <h2 id="totalNotRead">Total Books Not Read: 1</h2>
+                        <h2 id="totalNotRead">Total Books Not Read: None</h2>
                     </div>
                 </div>
             </div>
@@ -67,11 +64,13 @@
                         <a>Read</a>
                         <div>
                             <label for="yesRead">Yes</label>
-                            <input class="indentedHoverLight" type="radio" id="yesRead" value="true" name="bookRead" required>
+                            <input class="indentedHoverLight" type="radio" id="yesRead" value="true" name="bookRead"
+                                required>
 
 
                             <label for="noRead">No</label>
-                            <input class="indentedHoverLight" type="radio" id="noRead" vale="false" name="bookRead" required>
+                            <input class="indentedHoverLight" type="radio" id="noRead" vale="false" name="bookRead"
+                                required>
                         </div>
                     </div>
                 </div>
