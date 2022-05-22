@@ -54,63 +54,112 @@ html, body, .container {
     text-align: center;
 }
 
-#bookList > div {
+
+
+#bookList > div:first-child{
     display: flex;
     flex-direction: column;
     gap: var(--globalPadding);
 }
+
+#bookList > div {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-row: repeat(9, 1fr);
+    gap: var(--globalPadding);
+}
+
 .book {
+    margin-bottom: var(--globalPadding);
     background-color: var(--bgColorTwo);
     padding: var(--globalPadding);
     border-radius: var(--roundBorder);
 }
 
-#bookList > div > .notRead {
+#bookList > div > div > .notRead {
     background-color: var(--bgColorInvalid);
 
 }
 
-#bookList > div > .read {
+#bookList > div > div > .read {
     background-color: var(--bgColorValid);
 }
 
+#bookList > div > div:first-child{
+    grid-area: 1/1/6/6;
+}
+
+#bookList > div > div:nth-child(2) {
+    grid-area: 1/6/2/10;
+    display: flex;
+    flex-direction: column;
+    gap: var(--globalPadding);
+}
+
+#bookList > div > div:nth-child(2) > * {
+    margin: var(--globalPadding);
+}
+
+#bookList > div > div:nth-child(2) > * > h2 {
+    position: fixed;
+}
 
 .book > h4 {
     margin: 0px;
 }
 
 #addBookDiv {
+    grid-area: 2/4/3/8;
     visibility: hidden;
-    background-color: var(--bgColorTwo);
 }
-
 
 
 #addBookDiv > form {
-    align-content: center;
+    position: fixed;
+    padding: var(--globalPadding);
+    background-color: var(--bgColorThree);
+    border-radius: var(--roundBorder);
+    color: var(--lightColor);
 }
-#addBookDiv > form > div > div{
+
+#addBookDiv > form > h3 {
+    text-align: center;
+}
+
+#addBookDiv > form > div > div:nth-child(-n+3){
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(1, 1fr);
     gap: var(--globalPadding);
     grid-auto-flow: row;
 }
 
+#addBookDiv > form > div > div:nth-child(4) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--globalPadding);
+}
+
 #addBookDiv > form > div > div > a {
-    justify-self: end;
+    grid-column: 2/5;
+    text-align: center;
     color: var(--lightColor);
 }
 
+
 #addBookDiv > form > div > div > input {
     justify-self: start;
-    width: clamp(10%, 500px, 100%);
-    grid-column: 2/4;
+    grid-column: 5/10;
+}
+
+#addBookDiv > form > div > div > div > input[type="radio"]{
+    margin-left: 0px;
+    margin-right: var(--globalPadding);
 }
 
 #addBookDiv > form > div > * {
     padding: var(--globalPadding);
-    background-color: var(--bgColorTwo);
     color: var(--lightColor);
 }
 
@@ -118,10 +167,19 @@ html, body, .container {
     display: flex;
     gap: var(--globalPadding);
 }
-#addBookDiv > form > button {
-    align-self: center;
-    background-color: green;
+#addBookDiv > form > div:nth-child(3) {
+    text-align: center;
     margin-top: var(--globalPadding);
+}
+
+#addBookDiv > form > div:nth-child(3) > button {
+    color: var(--darkColor);
+    border-radius: var(--roundBorder);
+}
+
+#addBookDiv > form > div:nth-child(3) > button:hover{
+    background-color: var(--bgColorThree);
+    color: var(--lightColor);
 }
 
 .container > #addBookBtn {
@@ -139,13 +197,23 @@ html, body, .container {
 
 .container > #addBookBtn:hover {
     background-color: var(--bgColorTwo);
-    animation:spin 1s linear infinite;
+    animation:spin 0.1s linear;
+    animation-fill-mode: forwards;
 }
+
+.indentedHoverLight:hover {
+    box-shadow: inset 0px 0px 5px #c1c1c1;
+}
+
+.indentedHoverDark:hover {
+    box-shadow: 0px 0px 2px 1px var(--darkColor) inset;
+}
+
 
 @keyframes spin { 
     100% { 
-        -webkit-transform: rotate(360deg); 
-        transform:rotate(360deg); 
+        -webkit-transform: rotate(45deg); 
+        transform:rotate(45deg); 
     } 
 }
 

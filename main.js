@@ -1,4 +1,5 @@
 let myLibrary = [];
+let bookListVis = true;
 
 function Book(title, author, pages, read){
     this.title = title;
@@ -14,8 +15,23 @@ function Book(title, author, pages, read){
 }
 
 function addNewBook(){
-    document.querySelector("#addBookDiv").style.visibility = "visible";
+    toggleVisibility();
 }
+
+const toggleVisibility = () => {
+    if (bookListVis){
+        document.querySelector("#addBookDiv").style.visibility = "visible";
+        document.querySelector("#bookList").style.visibility = "hidden";
+        bookListVis = false;
+    }
+
+    else {
+        document.querySelector("#addBookDiv").style.visibility = "hidden";
+        document.querySelector("#bookList").style.visibility = "visible";
+        bookListVis = true;
+    }
+}
+
 let theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
 console.log(theHobbit.info());
 
