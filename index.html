@@ -18,7 +18,7 @@
         <div id="bookList">
             <h3>Book List</h3>
             <div>
-                <div>
+                <div id="books">
                     <div class="book notRead indentedHoverDark">
                         <h4 class="bookTitle">Title: The Hobbit</h4>
                         <h4 class="bookAuthor">Author: J.R.R Tolkien</h4>
@@ -50,37 +50,37 @@
                 <div>
                     <div>
                         <a>Book Title</a>
-                        <input type="text" placeholder="Book Title">
+                        <input id="bookTitle" name="bookTitle" type="text" placeholder="Book Title" required>
                     </div>
 
                     <div>
                         <a>Author Name</a>
-                        <input type="text" placeholder="Author Name">
+                        <input id="bookAuthor" name="bookAuthor" type="text" placeholder="Author Name" required>
                     </div>
 
                     <div>
                         <a> Total Pages</a>
-                        <input type="text" placeholder="Total Pages">
+                        <input id="bookPages" name="bookPages" type="number" placeholder="Total Pages" required>
                     </div>
 
                     <div>
                         <a>Read</a>
                         <div>
                             <label for="yesRead">Yes</label>
-                            <input class="indentedHoverLight" type="radio" id="yesRead" value="true" name="read">
+                            <input class="indentedHoverLight" type="radio" id="yesRead" value="true" name="bookRead" required>
 
 
                             <label for="noRead">No</label>
-                            <input class="indentedHoverLight" type="radio" id="noRead" vale="false" name="read">
+                            <input class="indentedHoverLight" type="radio" id="noRead" vale="false" name="bookRead" required>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <button class="indentedHoverLight" type="submit">Submit</button>
+                    <button class="indentedHoverLight" type="button" onclick="addNewBook()">Submit</button>
                 </div>
             </form>
         </div>
-        <button id="addBookBtn" class="indentedHoverLight" onclick="addNewBook()">+</button>
+        <button id="addBookBtn" class="indentedHoverLight" onclick="toggleAddBookVisibility()">+</button>
     </div>
 </body>
 
